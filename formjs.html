@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Validation with Regex</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px;align-items: center; }
+        input { display: block; margin-bottom: 30px; padding: 8px;border-style: inset; 
+            width: 250px; border-radius: 20px; }
+        button { padding: 8px 12px; cursor: pointer; }
+        .error { color: red; }
+        .success { color: green; }
+        h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Validate Input Data</h2>
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter the Name">
+    <span id="NameError" class="error"></span>
+
+    <label>Age:</label>
+    <input type="number" id="age" placeholder="Enter the age">
+    <span id="AgeError" class="error"></span>
+
+    <label>Email:</label>
+    <input type="text" id="email" placeholder="Enter Email">
+    <span id="emailError" class="error"></span>
+
+    <label>Phone Number:</label>
+    <input type="text" id="phone" placeholder="Enter Phone Number">
+    <span id="phoneError" class="error"></span>
+
+    <label>Pin Code:</label>
+    <input type="text" id="postal" placeholder="Enter Postal Code">
+    <span id="postalError" class="error"></span>
+
+    <label>Password:</label>
+    <input type="text" id="password" placeholder="Enter the password">
+    <span id="passwordError" class="error"></span>
+  
+    <button onclick="validateForm()">Validate</button>
+
+    <script>
+        function validateName(name){
+            const pattern = /^[a-zA-Z\s]+$/;
+            return pattern.test(name);
+        }
+
+        function validateAge(age){
+            const pattern = /^(1[8-9]|[2-5][0-9]|60)$/;
+            return pattern.test(age);
+        }
+
+        function validateEmail(email) {
+            const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return pattern.test(email);
+        }
+
+        function validatePhone(phone) {
+            const pattern = /^\+?[0-9]{1,3}?[-.\s]?[0-9]{10}$/;
+            return pattern.test(phone);
+        }
+
+        function validatePostal(postal) {
+            const pattern = /^[0-9]{6}?$/;
+            return pattern.test(postal);
+        }
+
+        function validatePassword(password){
+            const pattern =  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            return pattern.test(password);
+        }
+
+        function validateForm() {
+            let name =document.getElementById("name").value;
+            let age= document.getElementById("age").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            let postal = document.getElementById("postal").value;
+            let password = document.getElementById("password").value;
+
+            document.getElementById("NameError").textContent = validateName(name) ? "Valid Name" : "Invalid Name";
+            document.getElementById("AgeError").textContent =  validateAge(age) ? "Valid Name" : "Invalid Name";
+            document.getElementById("emailError").textContent = validateEmail(email) ? "Valid Email" : "Invalid Email";
+            document.getElementById("phoneError").textContent = validatePhone(phone) ? "Valid Phone Number" : "Invalid Phone Number";
+            document.getElementById("postalError").textContent = validatePostal(postal) ? "Valid Pin Code" : "Invalid Pin Code";
+            document.getElementById("passwordError").textContent = validatePassword(password) ? "Valid password":"Invalid password";
+
+            document.getElementById("NameError").className = validateName(name) ? "success" : "error";
+            document.getElementById("AgeError").className = validateAge(age) ? "success" : "error";
+            document.getElementById("emailError").className = validateEmail(email) ? "success" : "error";
+            document.getElementById("phoneError").className = validatePhone(phone) ? "success" : "error";
+            document.getElementById("postalError").className = validatePostal(postal) ? "success" : "error";
+            document.getElementById("passwordError").className = validatePassword(password) ? "success" : "error";
+
+        }
+    </script>
+</body>
+</html>
